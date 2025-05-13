@@ -1,37 +1,59 @@
 ﻿class RungeKuttamethod
 {
-    static void Main()
+    // Функция, задающая дифференциальное уравнение: dy/dx = f(x, y)
+    static double Функция(double x, double y)
     {
-        double x0 = 1.0d; //Начальная точка x
-        double y0 = 1.0d; //Начальное значение y
-        double h = 0.1d; //Шаг
-        int колличество_шагов = 10; //Количество шагов
-
-        МетодРунгеКутта(x0, y0, h, колличество_шагов); //Метод РунгеКутты
+        return x + y; //Формула 
     }
 
-    static double F(double x, double y)
-    {
-        //return -2 * y / x; //Формула xdy + 2ydx = 0
-        return y / x + 1.0 / (x * x); //Формула y' - (1/x)*y = 1/x^2
-    }
-
-    static void МетодРунгеКутта(double x0, double y0, double h, int колличество_шагов)
+    // Метод Рунге-Кутты 4-го порядка
+    static void МетодРунгеКутты(double x0, double y0, double шаг, int количествоШагов)
     {
         double x = x0;
         double y = y0;
 
-        Console.WriteLine("Шаг\t x\t\t y\t");
-        Console.WriteLine($"0\t {x:F6}\t {y:F6}");
-        for (int i = 1; i <= колличество_шагов; i++)
+        Console.WriteLine("\nРезультаты вычислений:");
+        Console.WriteLine("Шаг\tx\t\ty (числ.)\t");
+        Console.WriteLine("------------------------------------------------------------");
+
+        for (int i = 0; i <= количествоШагов; i++)
         {
-            double k1 = h * F(x, y);
-            double k2 = h * F(x + h / 2, y + k1 / 2);
-            double k3 = h * F(x + h / 2, y + k2 / 2);
-            double k4 = h * F(x + h, y + k2);
-            y += (k1 + 2 * k2 + 2 + 2 * k3 + 2 + k4) / 6;
-            x += h;
-            Console.WriteLine($"{i}\t {x:F6}\t {y:F6}");
+
+            Console.WriteLine($"{i}\t{x:F6}\t{y:F6}\t");
+
+            if (i < количествоШагов)
+            {
+                double k1 = шаг * Функция(x, y);
+                double k2 = шаг * Функция(x + шаг / 2, y + k1 / 2);
+                double k3 = шаг * Функция(x + шаг / 2, y + k2 / 2);
+                double k4 = шаг * Функция(x + шаг, y + k3);
+
+                y += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                x += шаг;
+            }
         }
     }
+
+    static void Main()
+    {
+        Console.WriteLine("Решение ОДУ методом Рунге-Кутты 4-го порядка");
+        Console.WriteLine("Уравнение: y' = x * y"); //Формула
+
+        // Ввод начальных условий
+        Console.Write("\nВведите начальное значение x0: ");
+        double x0 = double.Parse(Console.ReadLine());
+
+        Console.Write("Введите начальное значение y0: ");
+        double y0 = double.Parse(Console.ReadLine());
+
+        Console.Write("Введите шаг h: ");
+        double шаг = double.Parse(Console.ReadLine());
+
+        Console.Write("Введите количество шагов: ");
+        int количествоШагов = int.Parse(Console.ReadLine());
+
+        // Вычисление
+        МетодРунгеКутты(x0, y0, шаг, количествоШагов);
+    }
 }
+

@@ -1,9 +1,13 @@
-﻿class RungeKuttamethod
+﻿using System;
+using System.Collections.Generic;
+using MathNet.Numerics;
+
+class RungeKuttamethod
 {
     // Функция, задающая дифференциальное уравнение: dy/dx = f(x, y)
-    static double Функция(double x, double y)
+    static double F(double x, double y)
     {
-        return x + y; //Формула 
+        return x; //Формула 
     }
 
     // Метод Рунге-Кутты 4-го порядка
@@ -23,10 +27,10 @@
 
             if (i < количествоШагов)
             {
-                double k1 = шаг * Функция(x, y);
-                double k2 = шаг * Функция(x + шаг / 2, y + k1 / 2);
-                double k3 = шаг * Функция(x + шаг / 2, y + k2 / 2);
-                double k4 = шаг * Функция(x + шаг, y + k3);
+                double k1 = шаг * F(x, y);
+                double k2 = шаг * F(x + шаг / 2, y + k1 / 2);
+                double k3 = шаг * F(x + шаг / 2, y + k2 / 2);
+                double k4 = шаг * F(x + шаг, y + k3);
 
                 y += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
                 x += шаг;

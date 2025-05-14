@@ -41,7 +41,7 @@ class RungeKuttamethod
     static void Main()
     {
         Console.WriteLine("Решение ОДУ методом Рунге-Кутты 4-го порядка");
-        Console.WriteLine("Уравнение: y' = x * y"); //Формула
+        //Console.WriteLine("Уравнение: y' = x * y"); //Формула
 
         // Ввод начальных условий
         Console.Write("\nВведите начальное значение x0: ");

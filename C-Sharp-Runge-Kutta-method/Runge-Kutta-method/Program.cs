@@ -6,7 +6,7 @@ class RungeKuttamethod
     // Функция, задающая дифференциальное уравнение: dy/dx = f(x, y)
     static double F(double x, double y)
     {
-        return x * x - (2 * y) / x; //Формула 
+        return x; //Формула 
     }
 
     // Метод Рунге-Кутты 4-го порядка

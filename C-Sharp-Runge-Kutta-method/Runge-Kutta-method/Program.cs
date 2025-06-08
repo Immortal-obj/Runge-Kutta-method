@@ -10,7 +10,7 @@ class RungeKuttamethod
     }
 
     // Метод Рунге-Кутты 4-го порядка
-    static void МетодРунгеКутты(double x0, double y0, double шаг, int количествоШагов)
+    static void RungeKuttaMethod(double x0, double y0, double step, int NumberOfSteps)
     {
         double x = x0;
         double y = y0;
@@ -19,20 +19,20 @@ class RungeKuttamethod
         Console.WriteLine("Шаг\tx\t\ty (числ.)\t");
         Console.WriteLine("------------------------------------------------------------");
 
-        for (int i = 0; i <= количествоШагов; i++)
+        for (int i = 0; i <= NumberOfSteps; i++)
         {
 
             Console.WriteLine($"{i}\t{x:F6}\t{y:F6}\t");
 
-            if (i < количествоШагов)
+            if (i < NumberOfSteps)
             {
-                double k1 = шаг * F(x, y);
-                double k2 = шаг * F(x + шаг / 2, y + k1 / 2);
-                double k3 = шаг * F(x + шаг / 2, y + k2 / 2);
-                double k4 = шаг * F(x + шаг, y + k3);
+                double k1 = step * F(x, y);
+                double k2 = step * F(x + step / 2, y + k1 / 2);
+                double k3 = step * F(x + step / 2, y + k2 / 2);
+                double k4 = step * F(x + step, y + k3);
 
                 y += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
-                x += шаг;
+                x += step;
             }
         }
     }
@@ -50,13 +50,13 @@ class RungeKuttamethod
         double y0 = double.Parse(Console.ReadLine());
 
         Console.Write("Введите шаг h: ");
-        double шаг = double.Parse(Console.ReadLine());
+        double step = double.Parse(Console.ReadLine());
 
         Console.Write("Введите количество шагов: ");
-        int количествоШагов = int.Parse(Console.ReadLine());
+        int NumberOfSteps = int.Parse(Console.ReadLine());
 
         // Вычисление
-        МетодРунгеКутты(x0, y0, шаг, количествоШагов);
+        RungeKuttaMethod(x0, y0, step, NumberOfSteps);
     }
 }
 

@@ -6,7 +6,7 @@ class RungeKuttamethod
     // Функция, задающая дифференциальное уравнение: dy/dx = f(x, y)
     static double F(double x, double y)
     {
-        return x; //Формула 
+        return (1 / Math.Pow(Math.Cos(x), 3)) + (y * Math.Tan(x));  //Формула 
     }
 
     // Метод Рунге-Кутты 4-го порядка
@@ -26,12 +26,16 @@ class RungeKuttamethod
 
             if (i < NumberOfSteps)
             {
-                double k1 = step * F(x, y);
-                double k2 = step * F(x + step / 2, y + k1 / 2);
-                double k3 = step * F(x + step / 2, y + k2 / 2);
-                double k4 = step * F(x + step, y + k3);
+                double k1 = F(x, y);
+                Console.WriteLine("K1 = " + k1);
+                double k2 = F(x + (step / 2), y + (k1 * (step / 2)));
+                Console.WriteLine("K2 = " + k2);
+                double k3 = F(x + (step / 2), y + (k2 * (step / 2)));
+                Console.WriteLine("K3 = " + k3);
+                double k4 = F(x + step, y + (k3 * step));
+                Console.WriteLine("K4 = " + k4);
 
-                y += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                y += (step / 6) * (k1 + (2 * k2) + (2 * k3) + k4);
                 x += step;
             }
         }
